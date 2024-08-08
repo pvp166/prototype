@@ -1,4 +1,6 @@
 <?php
+use PRAMADILLO\Woocommerce_Pay_Per_Post_Restrict_Content;
+
 add_action('rest_api_init', function () {
     register_rest_route('custom/v1', '/purchase', array(
         'methods' => 'POST',
@@ -104,9 +106,15 @@ function handle_purchase_post(WP_REST_Request $request) {
     // Optional: Create an order in WooCommerce for the product purchase
     $order = wc_create_order();
     $order->add_product($product, 1); // Add product to order
-    $order->set_status('completed'); // Complete the order
-    $order->calculate_totals();
+    $order->set_customer_id($user_id);
+    $order->set_status('completed'); 
     $order->save();
-
-    return $tokens;
+    $restrict = new Woocommerce_Pay_Per_Post_Restrict_Content($post_id, true);
+    $user_email = wp_get_current_user()->user_email;
+    $bought = wc_customer_bought_product( $user_email , $user_id, trim( $product_ids[0] ) );
+    return array (
+        'purchased'=> $restrict->check_if_purchased(),
+        'email' => $user_email,
+        'bought' => $bought
+    );
 }

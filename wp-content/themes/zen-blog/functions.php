@@ -19,4 +19,23 @@ require get_template_directory() . '/buy-product.php';
 //     $product->set_catalog_visibility('visible'); // Set product visibility
 
 //     $product->save();
+//     $post_title = $post->post_title;
+//     $ppp_document_settings_meta = array(
+//         "product_ids" => array(array("label" => "$post_title - [#$post_id]", "value" => $post_id)),
+//         "delay_restriction_enable" => "",
+//         "delay_restriction" => "",
+//         "delay_restriction_frequency" => "day",
+//         "page_view_restriction_enable" => "",
+//         "page_view_restriction" => "",
+//         "page_view_restriction_frequency" => "day",
+//         "page_view_restriction_enable_time_frame" => "",
+//         "page_view_restriction_time_frame" => "",
+//         "expire_restriction_enable" => "",
+//         "expire_restriction" => "",
+//         "expire_restriction_frequency" => "day",
+//         "show_warnings" => ""
+//     );
+
+//     // Add the custom meta to the product
+//     add_post_meta($post_id, '_ppp_document_settings_meta', json_encode($ppp_document_settings_meta));
 // }
